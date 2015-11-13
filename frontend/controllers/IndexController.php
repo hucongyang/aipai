@@ -1,6 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\User;
+use yii\db\Exception;
+use yii\db\Query;
 use yii\web\Controller;
 
 class IndexController extends Controller
@@ -16,8 +19,15 @@ class IndexController extends Controller
         } else {
             $model = 'jj';
         }
-
+        $condition = 'id > :id';
+        $param[':id'] = 0;
+        $id = (new Query())
+            ->select('*')
+            ->from('cnhutong_user.user')
+            ->where($condition, $param)
+            ->orderBy('id desc')
+            ->all();
         $server = serialize($_COOKIE['PHPSESSID']);
-        return $this->render("index", ['model' => $model, 'model_time' => $model_time, 'server' => $server]);
+        return $this->render("index", ['model' => $model, 'model_time' => $model_time, 'server' => $server, 'id' => $id]);
     }
 }

@@ -14,11 +14,13 @@ use yii\helpers\Html;
             </tr>
         </thead>
         <tbody>
+        <?php foreach($id as $row): ?>
             <tr>
-                <td>1</td>
-                <td>1</td>
+                <td><?php echo $row['id'] ?></td>
+                <td><?php echo $row['username'] ?></td>
                 <td>1</td>
             </tr>
+        <?php endforeach ?>
             <tr>
                 <td id="time">1</td>
                 <td>1</td>
